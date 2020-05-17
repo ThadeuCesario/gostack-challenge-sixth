@@ -20,12 +20,11 @@ interface FileProps {
 
 const Import: React.FC = () => {
   const [uploadedFiles, setUploadedFiles] = useState<FileProps[]>([]);
+  const [textImport, setTextImport] = useState('Permitido apenas arquivos CSV');
   const history = useHistory();
 
   async function handleUpload(): Promise<void> {
-    // const data = new FormData();
-
-    // TODO
+    const data = new FormData();
 
     try {
       // await api.post('/transactions/import', data);
@@ -35,7 +34,7 @@ const Import: React.FC = () => {
   }
 
   function submitFile(files: File[]): void {
-    // TODO
+    setTextImport(files[0].name);
   }
 
   return (
@@ -50,7 +49,7 @@ const Import: React.FC = () => {
           <Footer>
             <p>
               <img src={alert} alt="Alert" />
-              Permitido apenas arquivos CSV
+              {textImport}
             </p>
             <button onClick={handleUpload} type="button">
               Enviar
